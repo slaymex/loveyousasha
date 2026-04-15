@@ -19,6 +19,7 @@
 
         body {
             font-family: 'Playfair Display', system-ui, sans-serif;
+            overflow-y: auto; /* ← ВКЛЮЧИЛИ ПРОЛИСТЫВАНИЕ */
         }
 
         .title-font {
@@ -31,6 +32,7 @@
 
         #main {
             background: linear-gradient(135deg, #be123c 0%, #6b21a8 100%);
+            min-height: 100vh;
         }
 
         .heart-piece {
@@ -75,32 +77,30 @@
                 0 0 70px rgb(190 18 60);
         }
 
-        .text-area {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
+        .text-plaque {
+            min-height: 620px; /* ← СДЕЛАЛ ОГРОМНУЮ ПЛАШКУ */
+            background: rgba(255,255,255,0.09);
+            backdrop-filter: blur(14px);
         }
     </style>
 </head>
-<body class="overflow-hidden">
+<body>
 
-    <!-- ЭКРАН АНИМАЦИИ СЕРДЕЧКА (оставили точно как ты сказал — начало нравится) -->
+    <!-- АНИМАЦИЯ СЕРДЕЧКА (оставили как тебе нравилось) -->
     <div id="intro" class="fixed inset-0 flex items-center justify-center z-50">
         <div class="relative w-[720px] h-[420px] flex items-center justify-center">
-            
-            <!-- ЛЕВАЯ ЧАСТЬ СЕРДЦА -->
+            <!-- ЛЕВАЯ ЧАСТЬ -->
             <div id="left-piece" class="heart-piece absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg width="260" height="260" viewBox="0 0 24 24" fill="#fda4af" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
                 </svg>
             </div>
-
-            <!-- ПРАВАЯ ЧАСТЬ СЕРДЦА -->
+            <!-- ПРАВАЯ ЧАСТЬ -->
             <div id="right-piece" class="heart-piece absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg width="260" height="260" viewBox="0 0 24 24" fill="#fda4af" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
                 </svg>
             </div>
-
             <!-- ЦЕЛОЕ СЕРДЦЕ -->
             <div id="full-heart" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50 opacity-0">
                 <svg width="340" height="340" viewBox="0 0 24 24" fill="#e11d48" xmlns="http://www.w3.org/2000/svg">
@@ -110,16 +110,14 @@
         </div>
     </div>
 
-    <!-- ГЛАВНЫЙ ЭКРАН — ИСПРАВЛЕННЫЙ (больше места, больше контента, красивее) -->
-    <div id="main" class="hidden min-h-screen flex items-center justify-center relative p-8 opacity-0">
+    <!-- ГЛАВНАЯ ОТКРЫТКА — ТЕПЕРЬ МОЖНО ПРОЛИСТЫВАТЬ -->
+    <div id="main" class="hidden relative py-12 px-6">
         
         <div id="hearts-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
 
-        <!-- Увеличенная и более наполненная открытка -->
-        <div class="card relative max-w-[1100px] w-full bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 p-16 md:p-24 text-center z-10">
+        <div class="card max-w-5xl mx-auto bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 p-12 md:p-20 text-center">
             
-            <!-- Верхний декор -->
-            <div class="flex justify-center mb-10">
+            <div class="flex justify-center mb-8">
                 <div class="flex gap-8 text-6xl">
                     <span class="animate-pulse">🌹</span>
                     <span class="animate-pulse delay-150">💖</span>
@@ -133,36 +131,21 @@
                 Дорогая Сашенька!
             </h1>
             
-            <div class="text-4xl md:text-5xl text-rose-200 font-light mb-16">
+            <div class="text-4xl md:text-5xl text-rose-200 font-light mb-12">
                 С 18-летием тебя, моя самая красивая девочка на свете! 🎂✨
             </div>
 
-            <!-- ЕЩЁ БОЛЬШЕЕ МЕСТО ДЛЯ ТВОЕГО ТЕКСТА + больше воздуха -->
-            <div class="text-area max-w-4xl mx-auto text-3xl md:text-4xl leading-relaxed text-white/95 font-light px-16 py-20 border border-white/20 rounded-3xl mb-16">
+            <!-- ОГРОМНАЯ ПЛАШКА ДЛЯ ТВОЕГО ТЕКСТА (теперь можно писать очень много) -->
+            <div class="text-plaque mx-auto rounded-3xl px-12 py-24 border border-white/20 mb-16 text-left text-3xl md:text-4xl leading-relaxed text-white/95 font-light">
                 <p id="custom-message" class="whitespace-pre-line">
-                    Здесь будет твой большой личный текст ❤️<br><br>
-                    Пиши сколько угодно — место специально сделали огромным.<br>
-                    Всё, что ты хочешь сказать своей Сашеньке в её 18 лет.
+                    ВСТАВЛЯЙ СЮДА СВОЙ ТЕКСТ<br><br>
+                    Пиши сколько угодно — плашка теперь огромная.<br>
+                    Сколько строк хочешь — столько и будет.<br>
+                    Можешь написать целое письмо, стих, признание — всё влезет.<br><br>
+                    (Просто замени этот текст на свой)
                 </p>
             </div>
 
-            <!-- ДОПОЛНИТЕЛЬНЫЙ КОНТЕНТ (красивые вставки, которые ты можешь оставить или заменить) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16 text-white/90">
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
-                    <div class="text-5xl mb-4">🌹</div>
-                    <p class="text-xl font-light">Ты — моё самое яркое чудо</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
-                    <div class="text-5xl mb-4">💖</div>
-                    <p class="text-xl font-light">18 лет — и весь мир теперь твой</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
-                    <div class="text-5xl mb-4">✨</div>
-                    <p class="text-xl font-light">Я горжусь тобой каждый день</p>
-                </div>
-            </div>
-
-            <!-- Подпись с любовью -->
             <div class="flex items-center justify-center gap-10 text-white/90">
                 <div class="text-6xl">❤️</div>
                 <div>
@@ -172,21 +155,18 @@
                 <div class="text-6xl">❤️</div>
             </div>
 
-            <!-- Нижний декор -->
             <div class="absolute bottom-12 right-12 text-rose-200 text-8xl rotate-12 opacity-70">🌹</div>
             <div class="absolute bottom-12 left-12 text-rose-200 text-8xl -rotate-12 opacity-70">🌹</div>
 
-            <!-- Кнопка повторной анимации -->
             <button onclick="restartAnimation()" 
                     class="absolute top-10 right-10 px-8 py-5 bg-white/20 hover:bg-white/30 text-white text-lg font-medium rounded-3xl flex items-center gap-3 backdrop-blur-md">
                 <span class="text-4xl">❤️</span>
-                <span>Посмотреть, как сердце соединяется, ещё раз</span>
+                <span>Посмотреть анимацию сердца ещё раз</span>
             </button>
         </div>
 
-        <!-- Подпись внизу -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 text-sm flex items-center gap-2">
-            Сделано с огромной любовью специально для 18-летия Сашеньки • Апрель 2026
+        <div class="text-center text-white/50 text-sm mt-12">
+            Сделано с любовью специально для 18-летия Сашеньки • Апрель 2026
         </div>
     </div>
 
@@ -243,8 +223,6 @@
                     intro.classList.add('hidden')
                     const main = document.getElementById('main')
                     main.classList.remove('hidden')
-                    main.style.transition = 'opacity 2s ease'
-                    main.style.opacity = '1'
                     createFloatingHearts()
                 }, 1600)
             }, 5800)
@@ -304,7 +282,7 @@
         window.onload = function () {
             initializeTailwind()
             startHeartAnimation()
-            console.log('%c✅ Открытка исправлена! Начало оставили как было (ты сказал — нравится), а главную часть сделали гораздо красивее и просторнее. Место под текст теперь огромное + добавил красивый дополнительный контент. Скопируй весь код в файл .html и проверь!', 'color:#e11d48; font-size:16px; font-family:Dancing Script')
+            console.log('%c✅ ГОТОВО! Теперь сайт полностью пролистывается. Плашка под текст — огромная (620px высота + сколько угодно строк). Просто замени текст внутри <p id="custom-message"> на свой. Сохрани как .html и открывай.', 'color:#e11d48; font-size:16px; font-family:Dancing Script')
         }
     </script>
 </body>
