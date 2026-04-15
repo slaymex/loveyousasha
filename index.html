@@ -7,52 +7,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
-
         :root {
             --tw-color-rose: #e11d48;
         }
-
         * {
             transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, transform, opacity;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         body {
             font-family: 'Playfair Display', system-ui, sans-serif;
-            overflow-y: auto; /* ← ВКЛЮЧИЛИ ПРОЛИСТЫВАНИЕ */
+            overflow-y: auto;
+            -webkit-text-size-adjust: 100%;
         }
-
         .title-font {
             font-family: 'Dancing Script', cursive;
         }
-
         #intro {
             background: linear-gradient(135deg, #f43f5e 0%, #a21caf 100%);
         }
-
         #main {
             background: linear-gradient(135deg, #be123c 0%, #6b21a8 100%);
             min-height: 100vh;
         }
-
         .heart-piece {
             filter: drop-shadow(0 0 40px rgba(251, 113, 133, 0.8));
         }
-
         #full-heart {
             filter: drop-shadow(0 0 80px #fda4af);
         }
-
         @keyframes pulseFullHeart {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.12); }
         }
-
         @keyframes floatHeart {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
         }
-
         .floating-heart {
             position: absolute;
             pointer-events: none;
@@ -60,48 +50,141 @@
             animation: floatHeart linear infinite;
             text-shadow: 0 0 20px rgba(251, 113, 133, 0.9);
         }
-
         .card {
             animation: cardPop 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
         }
-
         @keyframes cardPop {
             0% { transform: scale(0.75); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .glow-text {
             text-shadow: 
                 0 0 20px rgb(251 113 133),
                 0 0 40px rgb(251 113 133),
                 0 0 70px rgb(190 18 60);
         }
-
+        
+        /* СУПЕР-УЛУЧШЕННАЯ ПЛАШКА ДЛЯ ТЕЛЕФОНА */
         .text-plaque {
-            min-height: 620px; /* ← СДЕЛАЛ ОГРОМНУЮ ПЛАШКУ */
-            background: rgba(255,255,255,0.09);
-            backdrop-filter: blur(14px);
+            min-height: 520px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.06) 100%);
+            backdrop-filter: blur(18px);
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 
+                0 0 50px rgba(251, 113, 133, 0.35) inset,
+                0 25px 50px -12px rgb(190 18 60);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            font-size: 1.15rem;
+            line-height: 1.65;
+            padding: 38px 22px;
+        }
+        .text-plaque::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 40%;
+            height: 300%;
+            background: linear-gradient(120deg, transparent, rgba(253, 164, 175, 0.25), transparent);
+            transform: rotate(25deg);
+            animation: shine 8s linear infinite;
+            opacity: 0.4;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-150%) rotate(25deg); }
+            100% { transform: translateX(300%) rotate(25deg); }
+        }
+        .text-plaque::after {
+            content: '❤️';
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            font-size: 110px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ОПТИМИЗАЦИЯ ДЛЯ ТЕЛЕФОНОВ (очень сильная) */
+        .card {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+        @media (min-width: 480px) {
+            .card { padding: 24px 20px; }
+        }
+        @media (min-width: 640px) {
+            .card { padding: 32px; }
+        }
+        @media (min-width: 768px) {
+            .card { padding: 48px 60px; max-width: 1100px; }
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.05;
+        }
+        @media (min-width: 480px) { h1 { font-size: 3rem; } }
+        @media (min-width: 640px) { h1 { font-size: 3.5rem; } }
+        @media (min-width: 768px) { h1 { font-size: 4.5rem; } }
+
+        .greeting {
+            font-size: 1.65rem;
+        }
+        @media (min-width: 480px) { .greeting { font-size: 1.85rem; } }
+        @media (min-width: 640px) { .greeting { font-size: 2.25rem; } }
+        @media (min-width: 768px) { .greeting { font-size: 2.75rem; } }
+
+        /* Специально для плашки на маленьких экранах */
+        @media (max-width: 480px) {
+            .text-plaque {
+                font-size: 1.08rem;
+                line-height: 1.62;
+                padding: 32px 18px;
+                min-height: 480px;
+            }
+        }
+        @media (min-width: 640px) {
+            .text-plaque {
+                font-size: 1.4rem;
+                padding: 52px 32px;
+            }
+        }
+        @media (min-width: 768px) {
+            .text-plaque {
+                font-size: 1.7rem;
+                padding: 68px 48px;
+                min-height: 620px;
+            }
+        }
+
+        /* Чтобы текст НЕ рвался на одно слово в строку */
+        .text-plaque p {
+            word-break: normal;
+            hyphens: auto;
+            overflow-wrap: break-word;
         }
     </style>
 </head>
 <body>
 
-    <!-- АНИМАЦИЯ СЕРДЕЧКА (оставили как тебе нравилось) -->
+    <!-- АНИМАЦИЯ СЕРДЕЧКА (не трогаем) -->
     <div id="intro" class="fixed inset-0 flex items-center justify-center z-50">
         <div class="relative w-[720px] h-[420px] flex items-center justify-center">
-            <!-- ЛЕВАЯ ЧАСТЬ -->
             <div id="left-piece" class="heart-piece absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg width="260" height="260" viewBox="0 0 24 24" fill="#fda4af" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
                 </svg>
             </div>
-            <!-- ПРАВАЯ ЧАСТЬ -->
             <div id="right-piece" class="heart-piece absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg width="260" height="260" viewBox="0 0 24 24" fill="#fda4af" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
                 </svg>
             </div>
-            <!-- ЦЕЛОЕ СЕРДЦЕ -->
             <div id="full-heart" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50 opacity-0">
                 <svg width="340" height="340" viewBox="0 0 24 24" fill="#e11d48" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
@@ -110,13 +193,12 @@
         </div>
     </div>
 
-    <!-- ГЛАВНАЯ ОТКРЫТКА — ТЕПЕРЬ МОЖНО ПРОЛИСТЫВАТЬ -->
+    <!-- ГЛАВНАЯ ОТКРЫТКА (текст НЕ ИЗМЕНЯЛ) -->
     <div id="main" class="hidden relative py-12 px-6">
-        
         <div id="hearts-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
-
-        <div class="card max-w-5xl mx-auto bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 p-12 md:p-20 text-center">
-            
+        
+        <div class="card bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 text-center relative">
+           
             <div class="flex justify-center mb-8">
                 <div class="flex gap-8 text-6xl">
                     <span class="animate-pulse">🌹</span>
@@ -126,18 +208,18 @@
                     <span class="animate-pulse delay-600">🌹</span>
                 </div>
             </div>
-
+            
             <h1 class="text-7xl md:text-8xl font-bold text-white glow-text title-font tracking-[-3px] leading-none mb-6">
                 дорогая сашенька
             </h1>
-            
-            <div class="text-4xl md:text-5xl text-rose-200 font-light mb-12">
+           
+            <div class="greeting text-4xl md:text-5xl text-rose-200 font-light mb-12">
                 с 18-летием тебя, моя самая лучшая девушка (или бывшая я не понимаю)🎂✨
             </div>
-
-            <!-- ОГРОМНАЯ ПЛАШКА ДЛЯ ТВОЕГО ТЕКСТА (теперь можно писать очень много) -->
-            <div class="text-plaque mx-auto rounded-3xl px-12 py-24 border border-white/20 mb-16 text-left text-3xl md:text-4xl leading-relaxed text-white/95 font-light">
-                <p id="custom-message" class="whitespace-pre-line">
+            
+            <!-- ПЛАШКА (теперь идеально на телефоне) -->
+            <div class="text-plaque mx-auto rounded-3xl mb-16 text-left">
+                <p id="custom-message" class="whitespace-pre-line relative z-10">
                     Я очень сильно люблю тебя и очень надеюсь что ты тоже, правда искринне извиняюсь за все плохое что я сделал и за то что забыл тебя поздравить, клянусь я очень сильно это хотел сделать но я что то подзабыл, я желаю тебе всего самого наилучшего моя девочка, желаю что бы ты добивалась того чего хотела, что бы оставалось такой же красивой и харизматичной.<br><br>
                     Я очень сильно надеюсь что ты не держишь на меня обид, я полностью понимаю тебя если что, можешь оскорблять и т.д сколько влезет, я был не прав и виноват, я мудак.<br>
                     Надеюсь что мы реально справимся<br>
@@ -155,8 +237,11 @@
 
             <div class="absolute bottom-12 right-12 text-rose-200 text-8xl rotate-12 opacity-70">🌹</div>
             <div class="absolute bottom-12 left-12 text-rose-200 text-8xl -rotate-12 opacity-70">🌹</div>
+            
+            <div class="absolute top-8 left-8 text-5xl opacity-30">💖</div>
+            <div class="absolute top-8 right-8 text-5xl opacity-30">❤️</div>
 
-            <button onclick="restartAnimation()" 
+            <button onclick="restartAnimation()"
                     class="absolute top-10 right-10 px-8 py-5 bg-white/20 hover:bg-white/30 text-white text-lg font-medium rounded-3xl flex items-center gap-3 backdrop-blur-md">
                 <span class="text-4xl">❤️</span>
                 <span>Посмотреть анимацию сердца ещё раз</span>
@@ -172,29 +257,24 @@
         function initializeTailwind() {
             tailwind.config = { content: [], theme: { extend: {} } }
         }
-
         function startHeartAnimation() {
             const left = document.getElementById('left-piece')
             const right = document.getElementById('right-piece')
             const full = document.getElementById('full-heart')
-
             left.style.transform = 'translateX(-260px) rotate(-38deg) scale(0.95)'
             right.style.transform = 'translateX(260px) rotate(38deg) scale(0.95)'
-
             setTimeout(() => {
                 left.style.transitionDuration = '400ms'
                 right.style.transitionDuration = '400ms'
                 left.style.transform = 'translateX(-220px) rotate(-25deg) scale(1)'
                 right.style.transform = 'translateX(220px) rotate(25deg) scale(1)'
             }, 300)
-
             setTimeout(() => {
                 left.style.transitionDuration = '2600ms'
                 right.style.transitionDuration = '2600ms'
                 left.style.transform = 'translateX(-65px) rotate(-6deg) scale(1.15)'
                 right.style.transform = 'translateX(65px) rotate(6deg) scale(1.15)'
             }, 1200)
-
             setTimeout(() => {
                 left.style.transitionDuration = '800ms'
                 right.style.transitionDuration = '800ms'
@@ -202,21 +282,17 @@
                 right.style.opacity = '0'
                 left.style.transform = 'translateX(-40px) rotate(0deg) scale(1.3)'
                 right.style.transform = 'translateX(40px) rotate(0deg) scale(1.3)'
-
                 full.style.transitionDuration = '900ms'
                 full.style.opacity = '1'
                 full.style.transform = 'scale(1)'
-                
                 setTimeout(() => {
                     full.style.animation = 'pulseFullHeart 1.4s infinite'
                 }, 400)
             }, 3900)
-
             setTimeout(() => {
                 const intro = document.getElementById('intro')
                 intro.style.transition = 'opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1)'
                 intro.style.opacity = '0'
-
                 setTimeout(() => {
                     intro.classList.add('hidden')
                     const main = document.getElementById('main')
@@ -225,13 +301,11 @@
                 }, 1600)
             }, 5800)
         }
-
         function createFloatingHearts() {
             const container = document.getElementById('hearts-container')
             const items = ['❤️', '💖', '🌹', '💗', '✨']
             const colors = ['#fda4af', '#f43f5e', '#db2777', '#c026d3', '#f8b4c8']
-            
-            for (let i = 0; i < 130; i++) {
+            for (let i = 0; i < 140; i++) {
                 const el = document.createElement('div')
                 el.className = 'floating-heart'
                 el.textContent = items[Math.floor(Math.random() * items.length)]
@@ -246,22 +320,17 @@
                 setTimeout(() => el.remove(), 35000)
             }
         }
-
         window.restartAnimation = function () {
             const main = document.getElementById('main')
             const intro = document.getElementById('intro')
-            
             main.style.opacity = '0'
-            
             setTimeout(() => {
                 main.classList.add('hidden')
                 intro.classList.remove('hidden')
                 intro.style.opacity = '1'
-                
                 const left = document.getElementById('left-piece')
                 const right = document.getElementById('right-piece')
                 const full = document.getElementById('full-heart')
-                
                 left.style.transitionDuration = '0ms'
                 right.style.transitionDuration = '0ms'
                 left.style.opacity = '1'
@@ -270,17 +339,15 @@
                 full.style.opacity = '0'
                 full.style.transform = 'scale(0.5)'
                 full.style.animation = ''
-                
                 setTimeout(() => {
                     startHeartAnimation()
                 }, 80)
             }, 1100)
         }
-
         window.onload = function () {
             initializeTailwind()
             startHeartAnimation()
-            console.log('%c✅ ГОТОВО! Теперь сайт полностью пролистывается. Плашка под текст — огромная (620px высота + сколько угодно строк). Просто замени текст внутри <p id="custom-message"> на свой. Сохрани как .html и открывай.', 'color:#e11d48; font-size:16px; font-family:Dancing Script')
+            console.log('%c✅ ИСПРАВЛЕНО! Плашка теперь идеально выглядит на телефоне — текст не рвётся на одно слово в строку. Полная оптимизация под мобильные. Сохрани и проверь сразу на телефоне!', 'color:#e11d48; font-size:16px; font-family:Dancing Script')
         }
     </script>
 </body>
