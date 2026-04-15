@@ -47,14 +47,8 @@
         }
 
         @keyframes floatHeart {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120vh) rotate(720deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
         }
 
         .floating-heart {
@@ -80,11 +74,16 @@
                 0 0 40px rgb(251 113 133),
                 0 0 70px rgb(190 18 60);
         }
+
+        .text-area {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+        }
     </style>
 </head>
 <body class="overflow-hidden">
 
-    <!-- ЭКРАН АНИМАЦИИ СЕРДЕЧКА (два куска → соединяются в одно красивое сердце) -->
+    <!-- ЭКРАН АНИМАЦИИ СЕРДЕЧКА (оставили точно как ты сказал — начало нравится) -->
     <div id="intro" class="fixed inset-0 flex items-center justify-center z-50">
         <div class="relative w-[720px] h-[420px] flex items-center justify-center">
             
@@ -102,31 +101,31 @@
                 </svg>
             </div>
 
-            <!-- ЦЕЛОЕ СЕРДЦЕ (появляется после соединения) -->
+            <!-- ЦЕЛОЕ СЕРДЦЕ -->
             <div id="full-heart" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-50 opacity-0">
                 <svg width="340" height="340" viewBox="0 0 24 24" fill="#e11d48" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
                 </svg>
             </div>
-
         </div>
     </div>
 
-    <!-- ГЛАВНЫЙ ЭКРАН ОТКРЫТКИ (больше пространства, больше красоты) -->
+    <!-- ГЛАВНЫЙ ЭКРАН — ИСПРАВЛЕННЫЙ (больше места, больше контента, красивее) -->
     <div id="main" class="hidden min-h-screen flex items-center justify-center relative p-8 opacity-0">
         
-        <!-- Плавающие сердца и розы -->
         <div id="hearts-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
 
-        <!-- Сама открытка (увеличена, больше воздуха) -->
-        <div class="card relative max-w-5xl w-full bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 p-14 md:p-20 text-center z-10">
+        <!-- Увеличенная и более наполненная открытка -->
+        <div class="card relative max-w-[1100px] w-full bg-white/10 backdrop-blur-3xl rounded-3xl shadow-2xl border border-white/30 p-16 md:p-24 text-center z-10">
             
             <!-- Верхний декор -->
             <div class="flex justify-center mb-10">
-                <div class="flex gap-6 text-6xl">
+                <div class="flex gap-8 text-6xl">
                     <span class="animate-pulse">🌹</span>
-                    <span class="animate-pulse delay-200">💖</span>
-                    <span class="animate-pulse delay-400">🌹</span>
+                    <span class="animate-pulse delay-150">💖</span>
+                    <span class="animate-pulse delay-300">🌹</span>
+                    <span class="animate-pulse delay-450">💖</span>
+                    <span class="animate-pulse delay-600">🌹</span>
                 </div>
             </div>
 
@@ -134,20 +133,37 @@
                 Дорогая Сашенька!
             </h1>
             
-            <div class="text-4xl md:text-5xl text-rose-200 font-light mb-14">
+            <div class="text-4xl md:text-5xl text-rose-200 font-light mb-16">
                 С 18-летием тебя, моя самая красивая девочка на свете! 🎂✨
             </div>
 
-            <!-- Большое место под твой текст (ещё больше пространства) -->
-            <div class="max-w-3xl mx-auto text-3xl md:text-4xl leading-relaxed text-white/95 font-light px-12 py-14 border border-white/20 rounded-3xl bg-white/5 backdrop-blur-md">
+            <!-- ЕЩЁ БОЛЬШЕЕ МЕСТО ДЛЯ ТВОЕГО ТЕКСТА + больше воздуха -->
+            <div class="text-area max-w-4xl mx-auto text-3xl md:text-4xl leading-relaxed text-white/95 font-light px-16 py-20 border border-white/20 rounded-3xl mb-16">
                 <p id="custom-message" class="whitespace-pre-line">
-                    Здесь будет твой личный текст ❤️<br><br>
-                    Напиши всё, что хочешь сказать своей Сашеньке.<br>
-                    Место специально увеличено — пиши сколько угодно!
+                    Здесь будет твой большой личный текст ❤️<br><br>
+                    Пиши сколько угодно — место специально сделали огромным.<br>
+                    Всё, что ты хочешь сказать своей Сашеньке в её 18 лет.
                 </p>
             </div>
 
-            <div class="mt-16 flex items-center justify-center gap-10 text-white/90">
+            <!-- ДОПОЛНИТЕЛЬНЫЙ КОНТЕНТ (красивые вставки, которые ты можешь оставить или заменить) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16 text-white/90">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                    <div class="text-5xl mb-4">🌹</div>
+                    <p class="text-xl font-light">Ты — моё самое яркое чудо</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                    <div class="text-5xl mb-4">💖</div>
+                    <p class="text-xl font-light">18 лет — и весь мир теперь твой</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                    <div class="text-5xl mb-4">✨</div>
+                    <p class="text-xl font-light">Я горжусь тобой каждый день</p>
+                </div>
+            </div>
+
+            <!-- Подпись с любовью -->
+            <div class="flex items-center justify-center gap-10 text-white/90">
                 <div class="text-6xl">❤️</div>
                 <div>
                     <p class="text-4xl title-font">С бесконечной любовью,</p>
@@ -157,43 +173,36 @@
             </div>
 
             <!-- Нижний декор -->
-            <div class="absolute bottom-12 right-12 text-rose-200 text-7xl rotate-12 opacity-70">🌹</div>
-            <div class="absolute bottom-12 left-12 text-rose-200 text-7xl -rotate-12 opacity-70">🌹</div>
+            <div class="absolute bottom-12 right-12 text-rose-200 text-8xl rotate-12 opacity-70">🌹</div>
+            <div class="absolute bottom-12 left-12 text-rose-200 text-8xl -rotate-12 opacity-70">🌹</div>
 
             <!-- Кнопка повторной анимации -->
             <button onclick="restartAnimation()" 
-                    class="absolute top-10 right-10 px-7 py-4 bg-white/20 hover:bg-white/30 text-white text-base font-medium rounded-3xl flex items-center gap-3 backdrop-blur-md">
-                <span class="text-3xl">❤️</span>
+                    class="absolute top-10 right-10 px-8 py-5 bg-white/20 hover:bg-white/30 text-white text-lg font-medium rounded-3xl flex items-center gap-3 backdrop-blur-md">
+                <span class="text-4xl">❤️</span>
                 <span>Посмотреть, как сердце соединяется, ещё раз</span>
             </button>
         </div>
 
         <!-- Подпись внизу -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 text-sm flex items-center gap-2">
-            Сделано с огромной любовью специально для 18-летия Сашеньки • 2026
+            Сделано с огромной любовью специально для 18-летия Сашеньки • Апрель 2026
         </div>
     </div>
 
     <script>
-        // Настройка Tailwind
         function initializeTailwind() {
-            tailwind.config = {
-                content: [],
-                theme: { extend: {} }
-            }
+            tailwind.config = { content: [], theme: { extend: {} } }
         }
 
-        // Анимация двух кусков сердца, которые соединяются
         function startHeartAnimation() {
             const left = document.getElementById('left-piece')
             const right = document.getElementById('right-piece')
             const full = document.getElementById('full-heart')
 
-            // Начальное положение — два куска разлетелись в стороны
             left.style.transform = 'translateX(-260px) rotate(-38deg) scale(0.95)'
             right.style.transform = 'translateX(260px) rotate(38deg) scale(0.95)'
 
-            // 1. Лёгкое покачивание в начале
             setTimeout(() => {
                 left.style.transitionDuration = '400ms'
                 right.style.transitionDuration = '400ms'
@@ -201,7 +210,6 @@
                 right.style.transform = 'translateX(220px) rotate(25deg) scale(1)'
             }, 300)
 
-            // 2. Плавное соединение кусков в центр
             setTimeout(() => {
                 left.style.transitionDuration = '2600ms'
                 right.style.transitionDuration = '2600ms'
@@ -209,7 +217,6 @@
                 right.style.transform = 'translateX(65px) rotate(6deg) scale(1.15)'
             }, 1200)
 
-            // 3. Момент слияния — куски исчезают, появляется целое красивое сердце
             setTimeout(() => {
                 left.style.transitionDuration = '800ms'
                 right.style.transitionDuration = '800ms'
@@ -218,18 +225,15 @@
                 left.style.transform = 'translateX(-40px) rotate(0deg) scale(1.3)'
                 right.style.transform = 'translateX(40px) rotate(0deg) scale(1.3)'
 
-                // Появление целого сердца с эффектом вспышки
                 full.style.transitionDuration = '900ms'
                 full.style.opacity = '1'
                 full.style.transform = 'scale(1)'
                 
-                // Запускаем пульсацию целого сердца
                 setTimeout(() => {
                     full.style.animation = 'pulseFullHeart 1.4s infinite'
                 }, 400)
             }, 3900)
 
-            // 4. Финал анимации и переход к открытке
             setTimeout(() => {
                 const intro = document.getElementById('intro')
                 intro.style.transition = 'opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -241,37 +245,32 @@
                     main.classList.remove('hidden')
                     main.style.transition = 'opacity 2s ease'
                     main.style.opacity = '1'
-                    
-                    // Запускаем красивые плавающие сердечки и розы
                     createFloatingHearts()
                 }, 1600)
             }, 5800)
         }
 
-        // Плавающие сердечки + розы (больше красоты)
         function createFloatingHearts() {
             const container = document.getElementById('hearts-container')
-            const items = ['❤️', '💖', '🌹', '💗']
+            const items = ['❤️', '💖', '🌹', '💗', '✨']
             const colors = ['#fda4af', '#f43f5e', '#db2777', '#c026d3', '#f8b4c8']
             
-            for (let i = 0; i < 110; i++) {
+            for (let i = 0; i < 130; i++) {
                 const el = document.createElement('div')
                 el.className = 'floating-heart'
                 el.textContent = items[Math.floor(Math.random() * items.length)]
-                el.style.fontSize = `${Math.random() * 32 + 18}px`
+                el.style.fontSize = `${Math.random() * 34 + 18}px`
                 el.style.left = `${Math.random() * 100}vw`
                 el.style.bottom = `-${Math.random() * 40}px`
                 el.style.color = colors[Math.floor(Math.random() * colors.length)]
-                el.style.animationDuration = `${Math.random() * 14 + 11}s`
-                el.style.animationDelay = `-${Math.random() * 30}s`
-                el.style.opacity = Math.random() * 0.8 + 0.3
+                el.style.animationDuration = `${Math.random() * 15 + 10}s`
+                el.style.animationDelay = `-${Math.random() * 35}s`
+                el.style.opacity = Math.random() * 0.85 + 0.25
                 container.appendChild(el)
-
-                setTimeout(() => el.remove(), 32000)
+                setTimeout(() => el.remove(), 35000)
             }
         }
 
-        // Повтор анимации сердца
         window.restartAnimation = function () {
             const main = document.getElementById('main')
             const intro = document.getElementById('intro')
@@ -283,7 +282,6 @@
                 intro.classList.remove('hidden')
                 intro.style.opacity = '1'
                 
-                // Сброс всех элементов сердца
                 const left = document.getElementById('left-piece')
                 const right = document.getElementById('right-piece')
                 const full = document.getElementById('full-heart')
@@ -303,12 +301,10 @@
             }, 1100)
         }
 
-        // Запуск всего
         window.onload = function () {
             initializeTailwind()
             startHeartAnimation()
-            
-            console.log('%c❤️ Красивая открытка для Сашеньки готова! Два куска сердца теперь реально соединяются. Скопируй код в .html файл и открой.', 'color:#e11d48; font-size:18px; font-family:Dancing Script')
+            console.log('%c✅ Открытка исправлена! Начало оставили как было (ты сказал — нравится), а главную часть сделали гораздо красивее и просторнее. Место под текст теперь огромное + добавил красивый дополнительный контент. Скопируй весь код в файл .html и проверь!', 'color:#e11d48; font-size:16px; font-family:Dancing Script')
         }
     </script>
 </body>
